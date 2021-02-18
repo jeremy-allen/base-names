@@ -26,7 +26,7 @@ shinyUI(fluidPage(
    actionLink(
     inputId = "beauregard",
     label = "Camp Beauregard",
-    icon = icon("campground", class = "old", lib = "font-awesome")
+    icon = icon("fort-awesome", class = "old", lib = "font-awesome")
    ),
    
    actionLink(
