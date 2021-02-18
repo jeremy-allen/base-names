@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Ewert&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Brygada+1918&family=Ewert&display=swap');
+
+body {
+ color: rgb(255, 203, 5);
+ position: relative;
+ background: #1a1400;
+ font-family: 'Brygada 1918', serif;
+ font-weight: 300;
+ font-size: 1.5rem;
+}
+
+.navbar {
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+}
+
+.title {
+ display: flex;
+ color: rgb(255, 203, 5);
+ font-family: 'Ewert', cursive;
+ font-size: 3rem;
+ font-weight: 700;
+ padding-top: .5rem;
+ padding-bottom: 1rem;
+}
+
+.flex-outer-container {
+ height: 89vh;
+ margin: auto;
+ display: flex;
+ flex-flow: row wrap;
+ justify-content: center;
+ max-width: 1000px;
+}
+
+.col-container-base {
+ display: flex;
+ flex: 1;
+ flex-direction: column;
+ justify-content: flex-start;
+ padding: 1.5rem;
+ min-width: 180px;
+ max-width: 220px;
+}
+
+.col-container-union {
+ display: flex;
+ flex: 1;
+ flex-direction: column;
+ justify-content: flex-start;
+ align-items: center;
+ padding: 1rem;
+}
+
+.suggestion {
+ display: flex;
+ font-size: 1.5rem;
+ padding: 1rem;
+}
+
+.generals {
+ display: flex;
+ padding: 1rem;
+}
+
+a:link, .source{
+ color: rgb(255, 203, 5);
+ text-decoration: none;
+}
+
+a:hover, .source:hover {
+ color: rgb(0, 153, 51);
+ text-decoration: none;
+}
+
+a:active {
+ background: #1a1a1a;
+ text-decoration: none;
+}
+
+a:visited {
+ color: rgb(0, 153, 51);
+ text-decoration: none;
+}
+
+.old {
+ padding: 1rem;
+ color: rgb(255, 203, 5);
+}
+
+.generals-header {
+ background-color: #00000;
+}
+
+.footer {
+ display: flex;
+ flex-flow: column wrap;
+ align-items: center;
+ margin-top: 4rem;
+}
