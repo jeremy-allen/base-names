@@ -60,13 +60,11 @@ body {
 .suggestion {
  display: flex;
  font-size: 1.5rem;
- padding: 1rem;
- max-width: 90%;
-}
-
-.generals {
- display: flex;
- padding: 1rem;
+ padding: 2rem;
+ max-width: 70%;
+ min-width: 100px;
+ margin-left: 10px;
+ margin-right: 10px;
 }
 
 a:link, .source{
@@ -94,10 +92,6 @@ a:visited {
  color: rgb(255, 203, 5);
 }
 
-.generals-header {
- background-color: #00000;
-}
-
 .footer {
  display: flex;
  flex-flow: column wrap;
@@ -114,7 +108,7 @@ a:visited {
  padding: 1.5rem;
  border-radius: 8px;
  margin: 15px;
- min-width: 450px;
+ min-width: 400px;
  max-width: 600px;
 }
 
@@ -126,6 +120,7 @@ a:visited {
  font-weight: 300;
  padding-top: 1rem;
  padding-bottom: 1rem;
+ max-width: 90%;
 }
 
 .rank {
