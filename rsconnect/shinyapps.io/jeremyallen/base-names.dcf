@@ -5,8 +5,8 @@ account: jeremyallen
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3655859
-bundleId: 4238435
+bundleId: 4241989
 url: https://jeremyallen.shinyapps.io/base-names/
-when: 1613615395.34072
+when: 1613671236.72553
 asMultiple: FALSE
 asStatic: FALSE

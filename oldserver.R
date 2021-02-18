@@ -8,6 +8,7 @@ library(shiny)
 library(tidyverse)
 library(assertthat)
 library(quanteda)
+library(reactable)
 
 # font_add_google("Ewert", "ewert", regular.wt = 400, bold.wt = 700,)
 # font_add_google("Brygada 1918", "brygada", regular.wt = 400, bold.wt = 700,)
@@ -46,7 +47,7 @@ gens <- gens %>%
  separate(col = name, into = c("last_name", "first_middle_name"), extra = "merge", remove = FALSE) %>% 
  mutate(first_letter = str_extract(last_name, "^.")) %>% 
  mutate(syllables = nsyllable(last_name))
-
+ 
 
 bases <- bases %>% 
  separate(col = base, into = c("type", "confederate_name"), extra = "merge", remove = FALSE) %>% 
@@ -54,25 +55,14 @@ bases <- bases %>%
  mutate(syllables = as.integer(nsyllable(confederate_name))) %>% 
  mutate(syllables = if_else(confederate_name == "A.P. Hill", 3L, syllables))
 
-make_components <- function(name,substantive_rank,brevet_rank) {
- 
- div(
-  class = "card",
-  div(
-   class = "name",
-   name
-  ),
-  div(
-   class = "rank",
-   substantive_rank
-  ),
-  div(
-   class = "rank",
-   brevet_rank
-  )
- )
- 
-}
+theme <- reactableTheme(
+ style = list(color = "#e6b800", background = "#1a1400"),
+ cellStyle = list(borderColor = "#806600"),
+ headerStyle = list(borderColor = "#806600"),
+ paginationStyle = list(borderColor = "#806600"),
+ pageButtonHoverStyle = list(background = "#1a1400"),
+ pageButtonActiveStyle = list(background = "#1a1400")
+)
 
 shinyServer(function(input, output, session) {
  
@@ -85,7 +75,7 @@ shinyServer(function(input, output, session) {
   syls <- bases %>% 
    filter(confederate_name == "Beauregard") %>% 
    pull(syllables)
-  
+   
   x <- gens %>% 
    filter(first_letter == letter & syllables == syls) %>% 
    select(-first_letter, -syllables, -last_name, -first_middle_name, -notes)
@@ -95,12 +85,24 @@ shinyServer(function(input, output, session) {
     filter(confederate_name == "Beauregard") %>% 
     pull(base)
    
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
-  })
+   str_c(base_name, "'s", " name can be replaced with one of these Union General names. Same first letter and same number syllables. Easy.")
+  }) 
   
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
+  output$table <- renderReactable({
+   reactable(
+    x,
+    #groupBy = "name",
+    filterable = FALSE,
+    theme = theme,
+    defaultColDef = colDef(
+     headerClass = "generals-header"
+    ),
+    columns = list(
+     #notes = colDef(minWidth = 250),   # 50% width, 200px minimum
+     substantive_rank = colDef(minWidth = 225),   # 25% width, 100px minimum
+     brevet_rank = colDef(minWidth = 225)  # 25% width, 100px minimum
+    )
+   )
    
   })
   
@@ -126,12 +128,24 @@ shinyServer(function(input, output, session) {
     filter(confederate_name == "Polk") %>% 
     pull(base)
    
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
+   str_c(base_name, "'s", " name can be replaced with one of these Union General names. Same first letter and same number syllables. Easy.")
   }) 
   
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
+  output$table <- renderReactable({
+   reactable(
+    x,
+    #groupBy = "name",
+    filterable = FALSE,
+    theme = theme,
+    defaultColDef = colDef(
+     headerClass = "generals-header"
+    ),
+    columns = list(
+     #notes = colDef(minWidth = 250),   # 50% width, 200px minimum
+     substantive_rank = colDef(minWidth = 225),   # 25% width, 100px minimum
+     brevet_rank = colDef(minWidth = 225)  # 25% width, 100px minimum
+    )
+   )
    
   })
   
@@ -157,12 +171,24 @@ shinyServer(function(input, output, session) {
     filter(confederate_name == "Benning") %>% 
     pull(base)
    
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
+   str_c(base_name, "'s", " name can be replaced with one of these Union General names. Same first letter and same number syllables. Easy.")
   }) 
   
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
+  output$table <- renderReactable({
+   reactable(
+    x,
+    #groupBy = "name",
+    filterable = FALSE,
+    theme = theme,
+    defaultColDef = colDef(
+     headerClass = "generals-header"
+    ),
+    columns = list(
+     #notes = colDef(minWidth = 250),   # 50% width, 200px minimum
+     substantive_rank = colDef(minWidth = 225),   # 25% width, 100px minimum
+     brevet_rank = colDef(minWidth = 225)  # 25% width, 100px minimum
+    )
+   )
    
   })
   
@@ -188,17 +214,29 @@ shinyServer(function(input, output, session) {
     filter(confederate_name == "Gordon") %>% 
     pull(base)
    
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
+   str_c(base_name, "'s", " name can be replaced with one of these Union General names. Same first letter and same number syllables. Easy.")
   }) 
   
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
+  output$table <- renderReactable({
+   reactable(
+    x,
+    #groupBy = "name",
+    filterable = FALSE,
+    theme = theme,
+    defaultColDef = colDef(
+     headerClass = "generals-header"
+    ),
+    columns = list(
+     #notes = colDef(minWidth = 250),   # 50% width, 200px minimum
+     substantive_rank = colDef(minWidth = 225),   # 25% width, 100px minimum
+     brevet_rank = colDef(minWidth = 225)  # 25% width, 100px minimum
+    )
+   )
    
   })
   
  })
- 
+
  
  # bragg
  
@@ -221,12 +259,24 @@ shinyServer(function(input, output, session) {
     filter(confederate_name == "Bragg") %>% 
     pull(base)
    
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
+   str_c(base_name, "'s", " name can be replaced with one of these Union General names. Same first letter and same number syllables. Easy.")
   }) 
   
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
+  output$table <- renderReactable({
+   reactable(
+    x,
+    #groupBy = "name",
+    filterable = FALSE,
+    theme = theme,
+    defaultColDef = colDef(
+     headerClass = "generals-header"
+    ),
+    columns = list(
+     #notes = colDef(minWidth = 250),   # 50% width, 200px minimum
+     substantive_rank = colDef(minWidth = 225),   # 25% width, 100px minimum
+     brevet_rank = colDef(minWidth = 225)  # 25% width, 100px minimum
+    )
+   )
    
   })
   
@@ -254,12 +304,24 @@ shinyServer(function(input, output, session) {
     filter(confederate_name == "A.P. Hill") %>% 
     pull(base)
    
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
+   str_c(base_name, "'s", " name can be replaced with one of these Union General names. Same first letter and same number syllables. Easy.")
   }) 
   
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
+  output$table <- renderReactable({
+   reactable(
+    x,
+    #groupBy = "name",
+    filterable = FALSE,
+    theme = theme,
+    defaultColDef = colDef(
+     headerClass = "generals-header"
+    ),
+    columns = list(
+     #notes = colDef(minWidth = 250),   # 50% width, 200px minimum
+     substantive_rank = colDef(minWidth = 225),   # 25% width, 100px minimum
+     brevet_rank = colDef(minWidth = 225)  # 25% width, 100px minimum
+    )
+   )
    
   })
   
@@ -287,12 +349,24 @@ shinyServer(function(input, output, session) {
     filter(confederate_name == "Lee") %>% 
     pull(base)
    
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
+   str_c(base_name, "'s", " name can be replaced with one of these Union General names. Same first letter and same number syllables. Easy.")
   }) 
   
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
+  output$table <- renderReactable({
+   reactable(
+    x,
+    #groupBy = "name",
+    filterable = FALSE,
+    theme = theme,
+    defaultColDef = colDef(
+     headerClass = "generals-header"
+    ),
+    columns = list(
+     #notes = colDef(minWidth = 250),   # 50% width, 200px minimum
+     substantive_rank = colDef(minWidth = 225),   # 25% width, 100px minimum
+     brevet_rank = colDef(minWidth = 225)  # 25% width, 100px minimum
+    )
+   )
    
   })
   
@@ -321,12 +395,24 @@ shinyServer(function(input, output, session) {
     filter(confederate_name == "Pickett") %>% 
     pull(base)
    
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
+   str_c(base_name, "'s", " name can be replaced with one of these Union General names. Same first letter and same number syllables. Easy.")
   }) 
   
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
+  output$table <- renderReactable({
+   reactable(
+    x,
+    #groupBy = "name",
+    filterable = FALSE,
+    theme = theme,
+    defaultColDef = colDef(
+     headerClass = "generals-header"
+    ),
+    columns = list(
+     #notes = colDef(minWidth = 250),   # 50% width, 200px minimum
+     substantive_rank = colDef(minWidth = 225),   # 25% width, 100px minimum
+     brevet_rank = colDef(minWidth = 225)  # 25% width, 100px minimum
+    )
+   )
    
   })
   
@@ -355,12 +441,24 @@ shinyServer(function(input, output, session) {
     filter(confederate_name == "Rucker") %>% 
     pull(base)
    
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
+   str_c(base_name, "'s", " name can be replaced with one of these Union General names. Same first letter and same number syllables. Easy.")
   }) 
   
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
+  output$table <- renderReactable({
+   reactable(
+    x,
+    #groupBy = "name",
+    filterable = FALSE,
+    theme = theme,
+    defaultColDef = colDef(
+     headerClass = "generals-header"
+    ),
+    columns = list(
+     #notes = colDef(minWidth = 250),   # 50% width, 200px minimum
+     substantive_rank = colDef(minWidth = 225),   # 25% width, 100px minimum
+     brevet_rank = colDef(minWidth = 225)  # 25% width, 100px minimum
+    )
+   )
    
   })
   
@@ -389,17 +487,29 @@ shinyServer(function(input, output, session) {
     filter(confederate_name == "Hood") %>% 
     pull(base)
    
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
+   str_c(base_name, "'s", " name can be replaced with one of these Union General names. Same first letter and same number syllables. Easy.")
   }) 
   
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
+  output$table <- renderReactable({
+   reactable(
+    x,
+    #groupBy = "name",
+    filterable = FALSE,
+    theme = theme,
+    defaultColDef = colDef(
+     headerClass = "generals-header"
+    ),
+    columns = list(
+     #notes = colDef(minWidth = 250),   # 50% width, 200px minimum
+     substantive_rank = colDef(minWidth = 225),   # 25% width, 100px minimum
+     brevet_rank = colDef(minWidth = 225)  # 25% width, 100px minimum
+    )
+   )
    
   })
   
  })
  
+
  
- 
-}) # end server
+ }) # end server

@@ -1,9 +1,18 @@
 library(shiny)
+library(reactable)
 
 shinyUI(fluidPage(
  
  # where to get CSS
  includeCSS(path = here::here("www", "styles.css")),
+ # Application title
+ div(
+  class = "navbar",
+  div(
+   class = "title",
+   "Tidyverse to Armyverse.  How copy?  Over."
+  )
+ ),
  
  #---- main sections ----
  div(
@@ -11,17 +20,6 @@ shinyUI(fluidPage(
   
   div(
    class = "col-container-base",
-   
-   # Application title
-   div(
-     class = "navbar",
-     div(
-       class = "title",
-       "The 10X Re-Baser"
-     ),
-     p("The U.S. Army has to rename 10 bases."),
-     p("Here is a head start.")
-   ),
    
    actionLink(
     inputId = "beauregard",
@@ -81,19 +79,6 @@ shinyUI(fluidPage(
     inputId = "hood",
     label = "Fort Hood",
     icon = icon("fort-awesome", class = "old", lib = "font-awesome")
-   ),
-   
-   div(
-     class = "source",
-     tags$a(href="https://en.wikipedia.org/wiki/List_of_American_Civil_War_generals_(Union)", "Wikipedia")
-   ),
-   div(
-     class = "source",
-     tags$a(href="https://github.com/jeremy-allen/base-names", "code")
-   ),
-   div(
-     class = "source",
-     tags$a(href="https://twitter.com/jeremy_data", "@jeremy_data")
    )
    
   ),
@@ -106,11 +91,28 @@ shinyUI(fluidPage(
     textOutput("suggest")
    ),
    
-   uiOutput("cards")
+   div(
+    class = "generals",
+    reactableOutput("table")
+   )
    
   )
   
+ ),
+ 
+ div(
+  class = "footer",
+  div(
+   class = "source",
+   tags$a(href="https://en.wikipedia.org/wiki/List_of_American_Civil_War_generals_(Union)", "Wikipedia")
+  ),
+  div(
+   class = "source",
+   tags$a(href="https://github.com/jeremy-allen/base-names", "@jeremy-data")
+  )
+  
  )
+  
  
  
 )) # end shiny ui
