@@ -53,7 +53,7 @@ body {
  flex-direction: column;
  justify-content: flex-start;
  align-items: center;
- padding: 1rem;
+ padding: 2rem;
  min-width: 500px;
 }
 
@@ -108,7 +108,7 @@ a:visited {
  padding: 1.5rem;
  border-radius: 8px;
  margin: 15px;
- min-width: 400px;
+ min-width: 325px;
  max-width: 600px;
 }
 
@@ -121,6 +121,8 @@ a:visited {
  padding-top: 1rem;
  padding-bottom: 1rem;
  max-width: 90%;
+ margin: auto;
+ text-align: center;
 }
 
 .rank {
@@ -130,6 +132,8 @@ a:visited {
  padding-top: 1rem;
  padding-bottom: 1rem;
  max-width: 90%;
+ margin: auto;
+ text-align: center;
 }
 
 .source {
