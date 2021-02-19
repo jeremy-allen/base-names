@@ -65,6 +65,9 @@ body {
  min-width: 100px;
  margin-left: 10px;
  margin-right: 10px;
+ border-bottom: 2px solid #000;
+ border-bottom-left-radius: 8px;
+ border-bottom-right-radius: 8px;
 }
 
 a:link, .source{
