@@ -57,12 +57,43 @@ body {
  min-width: 500px;
 }
 
+.result-container {
+ display:flex;
+ flex-flow: column;
+ align-items: center;
+ padding: 0 1.5rem 1.5rem;
+ min-width: 100px;
+ margin: 15px;
+}
+
+.result-summary {
+ display: flex;
+ flex-flow: row no-wrap;
+ justify-content: space-around;
+ align-items: flex-end;
+ max-width: 45%;
+}
+
+.short-label {
+ display: flex;
+ margin: 5px;
+ align-self: flex-end;
+ padding-bottom: 0;
+}
+
+.big-capital {
+ display: flex;
+ margin: 5px;
+ font-family: 'Fredericka the Great', cursive;
+ font-size: 3rem;
+ align-self: flex-end;
+ padding-bottom: 0;
+}
+
 .suggestion {
  display: flex;
  font-size: 1.5rem;
  padding: 2rem;
- max-width: 70%;
- min-width: 100px;
  margin-left: 10px;
  margin-right: 10px;
  border-bottom: 4px solid #000;

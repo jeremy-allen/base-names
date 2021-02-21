@@ -101,10 +101,7 @@ shinyUI(fluidPage(
   div(
    class = "col-container-union",
    
-   div(
-    class = "suggestion",
-    textOutput("suggest")
-   ),
+   uiOutput("suggest"),
    
    uiOutput("cards")
    

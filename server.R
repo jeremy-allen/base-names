@@ -141,13 +141,40 @@ shinyServer(function(input, output, session) {
     
     # output
     
-    output$suggest <- renderText({
+    output$suggest <- renderUI({
      
-     glue("
+      div(
+        class = "result-container",
+        
+        div(
+          class = "result-summary",
+          
+          span(class = "short-label", "first letter: "),
+          span(
+            class = "big-capital",
+            letter
+          ),
+          
+          span(class = "short-label", "syllables: "),
+          span(
+            class = "big-capital",
+            as.character(syls)
+          )
+          
+        ),
+        
+        span(
+          class = "suggestion",
+          glue("
           {base_click$value} is named after a Confederate general. Here are all the \\
           Union generals with last names that have the same number of syllables \\
           and start with the same letter. Easy.
           ")
+        )
+        
+        
+      )
+      
      
     })
     
