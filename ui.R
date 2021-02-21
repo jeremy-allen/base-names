@@ -54,7 +54,7 @@ shinyUI(fluidPage(
    ),
    
    actionLink(
-    inputId = "A.P. Hill",
+    inputId = "AP Hill",
     label = "A.P. Hill",
     icon = icon("fort-awesome", class = "old", lib = "font-awesome")
    ),

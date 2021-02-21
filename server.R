@@ -103,8 +103,8 @@ shinyServer(function(input, output, session) {
     base_click$value <- "Fort Bragg"
   })
   
-  observeEvent(input$`A.P. Hill`, {
-    base_click$value <- "A.P. Hill"
+  observeEvent(input$`AP Hill`, {
+    base_click$value <- "Fort A.P. Hill"
   })
   
   observeEvent(input$`Fort Lee`, {
