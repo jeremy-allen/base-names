@@ -5,6 +5,7 @@ library(here)
 library(showtext)
 library(polite)
 library(shiny)
+library(glue)
 library(tidyverse)
 library(assertthat)
 library(quanteda)
@@ -74,331 +75,84 @@ make_components <- function(name,substantive_rank,brevet_rank) {
  
 }
 
+
 shinyServer(function(input, output, session) {
- 
- observeEvent(input$beauregard, {
   
-  letter <- bases %>% 
-   filter(confederate_name == "Beauregard") %>% 
-   pull(first_letter)
+  base_click <- reactiveValues()
   
-  syls <- bases %>% 
-   filter(confederate_name == "Beauregard") %>% 
-   pull(syllables)
-  
-  x <- gens %>% 
-   filter(first_letter == letter & syllables == syls) %>% 
-   select(-first_letter, -syllables, -last_name, -first_middle_name, -notes)
-  
-  output$suggest <- renderText({
-   base_name <- bases %>% 
-    filter(confederate_name == "Beauregard") %>% 
-    pull(base)
-   
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
+  observeEvent(input$`Camp Beauregard`, {
+    base_click$value <- "Camp Beauregard"
   })
   
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
-   
+  observeEvent(input$`Fort Polk`, {
+    base_click$value <- "Fort Polk"
   })
   
- })
- 
- 
- observeEvent(input$polk, {
-  
-  letter <- bases %>% 
-   filter(confederate_name == "Polk") %>% 
-   pull(first_letter)
-  
-  syls <- bases %>% 
-   filter(confederate_name == "Polk") %>% 
-   pull(syllables)
-  
-  x <- gens %>% 
-   filter(first_letter == letter & syllables == syls) %>% 
-   select(-first_letter, -syllables, -last_name, -first_middle_name, -notes)
-  
-  output$suggest <- renderText({
-   base_name <- bases %>% 
-    filter(confederate_name == "Polk") %>% 
-    pull(base)
-   
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
-  }) 
-  
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
-   
+  observeEvent(input$`Fort Benning`, {
+    base_click$value <- "Fort Benning"
   })
   
- })
- 
- 
- observeEvent(input$benning, {
-  
-  letter <- bases %>% 
-   filter(confederate_name == "Benning") %>% 
-   pull(first_letter)
-  
-  syls <- bases %>% 
-   filter(confederate_name == "Benning") %>% 
-   pull(syllables)
-  
-  x <- gens %>% 
-   filter(first_letter == letter & syllables == syls) %>% 
-   select(-first_letter, -syllables, -last_name, -first_middle_name, -notes)
-  
-  output$suggest <- renderText({
-   base_name <- bases %>% 
-    filter(confederate_name == "Benning") %>% 
-    pull(base)
-   
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
-  }) 
-  
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
-   
+  observeEvent(input$`Fort Gordon`, {
+    base_click$value <- "Fort Gordon"
   })
   
- })
- 
- 
- observeEvent(input$gordon, {
-  
-  letter <- bases %>% 
-   filter(confederate_name == "Gordon") %>% 
-   pull(first_letter)
-  
-  syls <- bases %>% 
-   filter(confederate_name == "Gordon") %>% 
-   pull(syllables)
-  
-  x <- gens %>% 
-   filter(first_letter == letter & syllables == syls) %>% 
-   select(-first_letter, -syllables, -last_name, -first_middle_name, -notes)
-  
-  output$suggest <- renderText({
-   base_name <- bases %>% 
-    filter(confederate_name == "Gordon") %>% 
-    pull(base)
-   
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
-  }) 
-  
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
-   
+  observeEvent(input$`Fort Bragg`, {
+    base_click$value <- "Fort Bragg"
   })
   
- })
- 
- 
- # bragg
- 
- observeEvent(input$bragg, {
-  
-  letter <- bases %>% 
-   filter(confederate_name == "Bragg") %>% 
-   pull(first_letter)
-  
-  syls <- bases %>% 
-   filter(confederate_name == "Bragg") %>% 
-   pull(syllables)
-  
-  x <- gens %>% 
-   filter(first_letter == letter & syllables == syls) %>% 
-   select(-first_letter, -syllables, -last_name, -first_middle_name, -notes)
-  
-  output$suggest <- renderText({
-   base_name <- bases %>% 
-    filter(confederate_name == "Bragg") %>% 
-    pull(base)
-   
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
-  }) 
-  
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
-   
+  observeEvent(input$`A.P. Hill`, {
+    base_click$value <- "A.P. Hill"
   })
   
- })
- 
- 
- # AP Hill
- 
- observeEvent(input$aphill, {
-  
-  letter <- bases %>% 
-   filter(confederate_name == "A.P. Hill") %>% 
-   pull(first_letter)
-  
-  syls <- bases %>% 
-   filter(confederate_name == "A.P. Hill") %>% 
-   pull(syllables)
-  
-  x <- gens %>% 
-   filter(first_letter == letter & syllables == syls) %>% 
-   select(-first_letter, -syllables, -last_name, -first_middle_name, -notes)
-  
-  output$suggest <- renderText({
-   base_name <- bases %>% 
-    filter(confederate_name == "A.P. Hill") %>% 
-    pull(base)
-   
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
-  }) 
-  
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
-   
+  observeEvent(input$`Fort Lee`, {
+    base_click$value <- "Fort Lee"
   })
   
- })
- 
- 
- # Lee
- 
- observeEvent(input$lee, {
-  
-  letter <- bases %>% 
-   filter(confederate_name == "Lee") %>% 
-   pull(first_letter)
-  
-  syls <- bases %>% 
-   filter(confederate_name == "Lee") %>% 
-   pull(syllables)
-  
-  x <- gens %>% 
-   filter(first_letter == letter & syllables == syls) %>% 
-   select(-first_letter, -syllables, -last_name, -first_middle_name, -notes)
-  
-  output$suggest <- renderText({
-   base_name <- bases %>% 
-    filter(confederate_name == "Lee") %>% 
-    pull(base)
-   
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
-  }) 
-  
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
-   
+  observeEvent(input$`Fort Pickett`, {
+    base_click$value <- "Fort Pickett"
   })
   
- })
- 
- 
- # Pickett
- 
- 
- observeEvent(input$pickett, {
-  
-  letter <- bases %>% 
-   filter(confederate_name == "Pickett") %>% 
-   pull(first_letter)
-  
-  syls <- bases %>% 
-   filter(confederate_name == "Pickett") %>% 
-   pull(syllables)
-  
-  x <- gens %>% 
-   filter(first_letter == letter & syllables == syls) %>% 
-   select(-first_letter, -syllables, -last_name, -first_middle_name, -notes)
-  
-  output$suggest <- renderText({
-   base_name <- bases %>% 
-    filter(confederate_name == "Pickett") %>% 
-    pull(base)
-   
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
-  }) 
-  
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
-   
+  observeEvent(input$`Fort Rucker`, {
+    base_click$value <- "Fort Rucker"
   })
   
- })
- 
- 
- # Rucker
- 
- 
- observeEvent(input$rucker, {
-  
-  letter <- bases %>% 
-   filter(confederate_name == "Rucker") %>% 
-   pull(first_letter)
-  
-  syls <- bases %>% 
-   filter(confederate_name == "Rucker") %>% 
-   pull(syllables)
-  
-  x <- gens %>% 
-   filter(first_letter == letter & syllables == syls) %>% 
-   select(-first_letter, -syllables, -last_name, -first_middle_name, -notes)
-  
-  output$suggest <- renderText({
-   base_name <- bases %>% 
-    filter(confederate_name == "Rucker") %>% 
-    pull(base)
-   
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
-  }) 
-  
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
-   
+  observeEvent(input$`Fort Hood`, {
+    base_click$value <- "Fort Hood"
   })
   
- })
- 
- 
- # Hood
- 
- 
- observeEvent(input$hood, {
   
-  letter <- bases %>% 
-   filter(confederate_name == "Hood") %>% 
-   pull(first_letter)
   
-  syls <- bases %>% 
-   filter(confederate_name == "Hood") %>% 
-   pull(syllables)
+  observeEvent(base_click$value, {
+    
+    letter <- bases %>% 
+     filter(base == base_click$value) %>% 
+     pull(first_letter)
+    
+    syls <- bases %>% 
+     filter(base == base_click$value) %>% 
+     pull(syllables)
+    
+    matched_generals <- gens %>% 
+     filter(first_letter == letter & syllables == syls) %>% 
+     select(-first_letter, -syllables, -last_name, -first_middle_name, -notes)
+    
+    output$suggest <- renderText({
+     
+     glue("
+          {base_click$value} is named after a Confederate general. Here are all the \\
+          Union generals with last names that have the same number of syllables \\
+          and start with the same letter. Easy.
+          ")
+     
+    })
+    
+    output$cards <- renderUI({
+     
+     pmap(matched_generals, make_components)
+     
+    })
   
-  x <- gens %>% 
-   filter(first_letter == letter & syllables == syls) %>% 
-   select(-first_letter, -syllables, -last_name, -first_middle_name, -notes)
-  
-  output$suggest <- renderText({
-   base_name <- bases %>% 
-    filter(confederate_name == "Hood") %>% 
-    pull(base)
-   
-   str_c(base_name, " is named after a Confederate general. ", " Here are all the Union generals with last names that have the same number of syllables and start with the same letter. Easy.")
-  }) 
-  
-  output$cards <- renderUI({
-   
-   pmap(x, make_components)
-   
   })
-  
- })
  
  
  

@@ -24,61 +24,61 @@ shinyUI(fluidPage(
    ),
    
    actionLink(
-    inputId = "beauregard",
+    inputId = "Camp Beauregard",
     label = "Camp Beauregard",
     icon = icon("fort-awesome", class = "old", lib = "font-awesome")
    ),
    
    actionLink(
-    inputId = "polk",
+    inputId = "Fort Polk",
     label = "Fort Polk",
     icon = icon("fort-awesome", class = "old", lib = "font-awesome")
    ),
    
    actionLink(
-    inputId = "benning",
+    inputId = "Fort Benning",
     label = "Fort Benning",
     icon = icon("fort-awesome", class = "old", lib = "font-awesome")
    ),
    
    actionLink(
-    inputId = "gordon",
+    inputId = "Fort Gordon",
     label = "Fort Gordon",
     icon = icon("fort-awesome", class = "old", lib = "font-awesome")
    ),
    
    actionLink(
-    inputId = "bragg",
+    inputId = "Fort Bragg",
     label = "Fort Bragg",
     icon = icon("fort-awesome", class = "old", lib = "font-awesome")
    ),
    
    actionLink(
-    inputId = "aphill",
+    inputId = "A.P. Hill",
     label = "A.P. Hill",
     icon = icon("fort-awesome", class = "old", lib = "font-awesome")
    ),
    
    actionLink(
-    inputId = "lee",
+    inputId = "Fort Lee",
     label = "Fort Lee",
     icon = icon("fort-awesome", class = "old", lib = "font-awesome")
    ),
    
    actionLink(
-    inputId = "pickett",
+    inputId = "Fort Pickett",
     label = "Fort Pickett",
     icon = icon("fort-awesome", class = "old", lib = "font-awesome")
    ),
    
    actionLink(
-    inputId = "rucker",
+    inputId = "Fort Rucker",
     label = "Fort Rucker",
     icon = icon("fort-awesome", class = "old", lib = "font-awesome")
    ),
    
    actionLink(
-    inputId = "hood",
+    inputId = "Fort Hood",
     label = "Fort Hood",
     icon = icon("fort-awesome", class = "old", lib = "font-awesome")
    ),
