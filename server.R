@@ -78,6 +78,9 @@ make_components <- function(name,substantive_rank,brevet_rank) {
 
 shinyServer(function(input, output, session) {
   
+  # I don't want a selectInput or radio buttons in the UI, so
+  # I need a separate actionLink for each base
+  
   base_click <- reactiveValues()
   
   observeEvent(input$`Camp Beauregard`, {
@@ -121,7 +124,7 @@ shinyServer(function(input, output, session) {
   })
   
   
-  
+  # A single observeEvent can now make all the html ouput
   observeEvent(base_click$value, {
     
     letter <- bases %>% 
@@ -135,6 +138,8 @@ shinyServer(function(input, output, session) {
     matched_generals <- gens %>% 
      filter(first_letter == letter & syllables == syls) %>% 
      select(-first_letter, -syllables, -last_name, -first_middle_name, -notes)
+    
+    # output
     
     output$suggest <- renderText({
      
