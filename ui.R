@@ -19,7 +19,7 @@ shinyUI(fluidPage(
        class = "title",
        "The 10X Re-Baser"
      ),
-     p("The U.S. Army has to rename 10 bases."),
+     p("The U.S. Army has to rename 10 bases named after Confederate generals."),
      p("Here is a head start.")
    ),
    
