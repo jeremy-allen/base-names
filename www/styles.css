@@ -3,9 +3,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
 
 body {
- color: rgb(255, 203, 5);
+ color: rgb(218, 183, 43);
  position: relative;
- background: #1a1400;
+ background: #31271c;
  font-family: 'Brygada 1918', serif;
  font-weight: 300;
  font-size: 1.5rem;
@@ -96,13 +96,13 @@ body {
  padding: 2rem;
  margin-left: 10px;
  margin-right: 10px;
- border-bottom: 4px solid #000;
+ border-bottom: 4px solid #1a1400;
  border-bottom-left-radius: 8px;
  border-bottom-right-radius: 8px;
 }
 
 a:link, .source{
- color: rgb(255, 203, 5);
+ color: rgb(218, 183, 43);
  text-decoration: none;
 }
 
@@ -127,7 +127,7 @@ img {
 
 .old {
  padding: 1rem;
- color: rgb(255, 203, 5);
+ color: rgb(218, 183, 43);
 }
 
 .footer {
@@ -147,12 +147,12 @@ img {
  margin: 15px;
  min-width: 325px;
  max-width: 600px;
- background: #000;
+ background: #1a1400;
 }
 
 .name {
  display: flex;
- color: rgb(255, 203, 5);
+ color: rgb(218, 183, 43);
  font-family: 'Fredericka the Great', cursive;
  font-size: 2.75rem;
  font-weight: 300;
@@ -165,7 +165,7 @@ img {
 
 .rank {
  display: flex;
- color: rgb(255, 203, 5);
+ color: rgb(218, 183, 43);
  font-size: 1.5rem;
  padding-top: 1rem;
  padding-bottom: 1rem;
